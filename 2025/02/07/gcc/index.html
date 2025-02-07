@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>GCC 工具链 | Silicon Walker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="GCC工具链通常所说的GCC是GUN Compiler Collection的简称，是Linux系统上常用的编译工具。GCC实质上不是一个单独的程序，而是多个程序的集合，因此通常称为GCC工具链。工具链软件包括GCC、C运行库、Binutils、GDB等。本文记录perl单行命令的常用用法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GCC 工具链">
+<meta property="og:url" content="http://example.com/2025/02/07/gcc/index.html">
+<meta property="og:site_name" content="Silicon Walker">
+<meta property="og:description" content="GCC工具链通常所说的GCC是GUN Compiler Collection的简称，是Linux系统上常用的编译工具。GCC实质上不是一个单独的程序，而是多个程序的集合，因此通常称为GCC工具链。工具链软件包括GCC、C运行库、Binutils、GDB等。本文记录perl单行命令的常用用法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-02-07T03:39:43.079Z">
+<meta property="article:modified_time" content="2025-02-07T03:53:27.744Z">
+<meta property="article:author" content="guoshaocheng">
+<meta property="article:tag" content="c语言">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Silicon Walker" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Silicon Walker</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-gcc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/02/07/gcc/" class="article-date">
+  <time class="dt-published" datetime="2025-02-07T03:39:43.079Z" itemprop="datePublished">2025-02-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      GCC 工具链
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="GCC工具链"><a href="#GCC工具链" class="headerlink" title="GCC工具链"></a>GCC工具链</h1><p>通常所说的GCC是GUN Compiler Collection的简称，是Linux系统上常用的编译工具。GCC实质上不是一个单独的程序，而是多个程序的集合，因此通常称为GCC工具链。工具链软件包括GCC、C运行库、Binutils、GDB等。<br>本文记录perl单行命令的常用用法。</p>
+<span id="more"></span>
+
+<h2 id="Binutils"><a href="#Binutils" class="headerlink" title="Binutils"></a>Binutils</h2><p><strong>GNU Binary Utilities</strong> 或 <strong>binutils</strong> 是一整套的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80">编程语言</a>工具程序，用来处理许多格式的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%9B%AE%E7%9A%84%E6%AA%94">目标文件</a>。</p>
+<p>其中常用工具包括 objcopy、objdump、as、ld、ldd、readelf、size 等。</p>
+<h3 id="objcopy"><a href="#objcopy" class="headerlink" title="objcopy"></a>objcopy</h3><p>用于转换文件格式，例如将 <code>bin</code> 转换为 <code>elf</code>，或将 <code>elf</code> 转换为 <code>bin</code>。</p>
+<h3 id="objdump"><a href="#objdump" class="headerlink" title="objdump"></a>objdump</h3><p>用于对 <code>elf</code> 文件进行反汇编</p>
+<h3 id="readelf"><a href="#readelf" class="headerlink" title="readelf"></a>readelf</h3><p>显示 <code>elf</code> 文件的内容</p>
+<h3 id="size"><a href="#size" class="headerlink" title="size"></a>size</h3><p>列出可执行文件每个部分的大小</p>
+<h1 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h1><p>gcc 有对 <code>cpp</code>， <code>as</code>， <code>ld</code> 这些命令做后台封装，可以直接通过gcc的某个选项调用相应的命令。</p>
+<p>假如 <code>main</code> 函数调用了另一个文件中的 <code>foo</code> 函数，则在 <code>link</code> 阶段之前，编译器都不需要知道 <code>foo</code> 函数的具体实现，只需要知道它的参数类型和返回值类型。</p>
+<p>在link阶段，链接器才会把 <code>main</code> 函数中 <code>foo</code> 函数链接到 <code>foo</code> 函数的所在文件单独编译之后的目标文件所在地址。</p>
+<h2 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h2><ol>
+<li>处理宏定义 <code>#define</code> 和条件编译指令 <code>#ifdef,#elif,#else,#endif</code> ；</li>
+<li>插入 <code>#include</code> 的文件内容；</li>
+<li>删除注释；</li>
+<li>添加行号和文件标识；</li>
+<li>保留所有的#pragma编译器指令？</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -E -o a.i a.c</span><br><span class="line">#<span class="meta"># cpp -o ...</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="预编译指令"><a href="#预编译指令" class="headerlink" title="预编译指令"></a>预编译指令</h3><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>生成汇编代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -S -o a.s a.c/a.i</span><br></pre></td></tr></table></figure>
+
+<h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><p>对上一阶段的汇编代码进行处理，生成处理器能识别的指令，保存在后缀为.o的目标文件中。</p>
+<p>由于每一个汇编语句几乎都对应一条处理器指令，因此，汇编相对于编译过程比较简单，通过调用Binutils中的汇编器as根据汇编指令和处理器指令的对照表一一翻译即可。</p>
+<p>当程序由多个源代码文件构成时，每个文件都要先完成汇编工作，生成.o目标文件后，才能进入下一步的链接工作。</p>
+<p>注意：目标文件已经是最终程序的某一部分了，但是在链接之前还不能执行。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -c -o a.o a.s/a.i/a.c</span><br><span class="line">#<span class="meta"># as -o ...</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>经过汇编以后的目标文件还不能直接运行，为了变成能够被加载的可执行文件，文件中必须包含固定格式的信息头，还必须与系统提供的启动代码链接起来才能正常运行，这些工作都是由链接器来完成的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o a a.<span class="number">0</span>/a.s/a.i/a.c</span><br></pre></td></tr></table></figure>
+
+<p>在Linux系统中，可以直接使用gcc命令执行编译直至链接的过程，gcc会自动将所需的依赖库以及引导程序链接在一起成为Linux系统可以加载的ELF格式可执行文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc a.c -o a</span><br></pre></td></tr></table></figure>
+
+<p>生成 上述各个过程的中间文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc a.c --save-temps      <span class="comment">// 生成可执行文件 a.out</span></span><br><span class="line">gcc a.c -o a --save-temps <span class="comment">// 生成可执行文件 a</span></span><br></pre></td></tr></table></figure>
+
+<p>链接又分为静态链接和动态链接，上述过程属于静态链接。</p>
+<ul>
+<li>动态链接库：windows 通常为 <code>.dll</code> 后缀，Linux 通常为 <code>.so</code> 后缀</li>
+<li>静态链接库：windows 通常为 <code>.lib</code> 后缀，Linux 通常为 <code>.a</code> 后缀</li>
+</ul>
+<h3 id="静态链接"><a href="#静态链接" class="headerlink" title="静态链接"></a>静态链接</h3><p>静态链接的缺点就是当程序大时非常占用内存和磁盘空间，而且后续程序更新困难。</p>
+<h3 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h3><p>动态链接只有在运行时刻才会加载动态链接库，在磁盘中只保存一份动态链接库。</p>
+<p>当程序运行时，系统会将当前程序中未解析的符号绑定到相应的动态链接库中，并进行重定位。</p>
+<h1 id="ELF文件"><a href="#ELF文件" class="headerlink" title="ELF文件"></a>ELF文件</h1><p>编译器编译源代码后生成的文件叫做<strong>目标文件</strong>，而目标文件经过编译器链接之后得到的就是<strong>可执行文件</strong>。</p>
+<p>目标文件和可执行文件一般采用同样的格式进行存储。</p>
+<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><p>上述汇编阶段之后生成的文件为elf文件，通常为 <code>.o</code> 后缀。</p>
+<p>ELF的含义为 Executable and Linkable Format。</p>
+<p>ELF文件除了含有机器码之外还有其它信息，如：段加载地址，运行入口地址，数据段等。</p>
+<p>ELF的文件格式：</p>
+<ul>
+<li>.text  程序的指令代码段</li>
+<li>.rodata 只读数据段，比如 const</li>
+<li>.data  已初始化的全局变量和静态变量</li>
+<li>.bss  未初始化的全局变量和静态变量<ul>
+<li>普通局部变量在运行时被保存在堆栈中，既不出现在.data段中，也不出现在.bss段中</li>
+</ul>
+</li>
+<li>.debug</li>
+</ul>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>由于elf文件时二进制格式，无法直接查看，需要使用工具转换格式之后查看。</p>
+<p>可以分别通过 <code>readelf</code> 文件的 <code>-h</code>，<code>-l</code> 和 <code>-S</code> 参数查看 ELF 文件头（ELF Header）、程序头部表（Program Headers Table，段表）和节区表（Section Headers Table）。</p>
+<ul>
+<li><p>readelf</p>
+<p>查看elf文件各个section的信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">readelf -S test.o</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>objdump</p>
+<p>反汇编指令，用于查看elf的原始程序。</p>
+<p>直接查看elf文件对应的原始程序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -D, --disassemble-all Display assembler contents of all sections</span></span><br><span class="line">objdump -D test.o</span><br></pre></td></tr></table></figure>
+
+<p>将elf反汇编，并将其与C原始程序混合显示出来</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// -S, --source Intermix source code with disassembly</span></span><br><span class="line">objdump -S test.o</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://chuquan.me/2018/06/03/linking-static-linking-dynamic-linking/">链接、静态链接、动态链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://tinylab.gitbooks.io/cbook/content/">C 语言编程透视</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/02/07/gcc/" data-id="cm6u817yn0000ao0rhfue8x7o" data-title="GCC 工具链" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/02/07/%E5%8F%98%E9%87%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          C 语言变量
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/25/shell/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">shell 相关</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%87%E5%BF%98/">备忘</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/find/" rel="tag">find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/" rel="tag">perl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl-one-line/" rel="tag">perl_one_line</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">c语言</a> <a href="/tags/find/" style="font-size: 10px;">find</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/perl/" style="font-size: 10px;">perl</a> <a href="/tags/perl-one-line/" style="font-size: 10px;">perl_one_line</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/07/hexo/">hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E5%8F%98%E9%87%8F/">C 语言变量</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/gcc/">GCC 工具链</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/25/shell/">shell 相关</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 guoshaocheng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

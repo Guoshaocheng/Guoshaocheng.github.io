@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Perl单行命令 | Silicon Walker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文记录perl单行命令的常用用法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perl单行命令">
+<meta property="og:url" content="http://example.com/2018/05/05/perl_one_line/index.html">
+<meta property="og:site_name" content="Silicon Walker">
+<meta property="og:description" content="本文记录perl单行命令的常用用法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-05-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-07T03:35:35.888Z">
+<meta property="article:author" content="guoshaocheng">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="perl_one_line">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Silicon Walker" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Silicon Walker</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-perl_one_line" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/05/perl_one_line/" class="article-date">
+  <time class="dt-published" datetime="2018-05-04T16:00:00.000Z" itemprop="datePublished">2018-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Perl单行命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文记录perl单行命令的常用用法。</p>
+<span id="more"></span>
+
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><p>测试文件内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">cat</span> <span class="built_in">test</span> </span><br><span class="line">line 1</span><br><span class="line"></span><br><span class="line">line 2</span><br><span class="line">line 3</span><br><span class="line">line 4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">line 5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">line 6</span><br></pre></td></tr></table></figure>
+
+<h3 id="e-选项"><a href="#e-选项" class="headerlink" title="-e 选项"></a>-e 选项</h3><ul>
+<li>执行指定的脚本</li>
+<li>该选项必须置于所有选项的后面</li>
+</ul>
+<h3 id="p-选项"><a href="#p-选项" class="headerlink" title="-p 选项"></a>-p 选项</h3><ul>
+<li><p>自动循环加自动输出，相当于 <code>while (&lt;&gt;) &#123;script; print; &#125;</code></p>
+</li>
+<li><p>-p 开关更适用于对文件进行的完全处理</p>
+</li>
+</ul>
+<h3 id="n-选项"><a href="#n-选项" class="headerlink" title="-n 选项"></a>-n 选项</h3><ul>
+<li>自动循环，相当于 <code>while(&lt;&gt;) &#123;script;&#125;</code></li>
+<li>-n 开关更适用于 选择性文件处理,这样的处理只需打印特定数据</li>
+</ul>
+<h3 id="l-选项"><a href="#l-选项" class="headerlink" title="-l 选项"></a>-l 选项</h3><p>用于设置输出分隔符 <code>$\</code></p>
+<p><code>-l &lt;OCTNUM&gt;</code> (用 8 进制表示)</p>
+<p>如果省略了OCTNUM，则将输出分隔符 <code>$\</code> 设置为输入行分隔符变量 <code>$/</code> 的值，通常是换行符；</p>
+<p>对输入内容自动 <code>chomp</code>，对输出内容自动添加换行;</p>
+<p>在下面代码中，会分两步处理：</p>
+<ol>
+<li>处理 <code>-l</code> 时, <code>$\ = $/;</code></li>
+<li>处理 <code>-00</code> 时, <code>$/ = &quot;&quot;;</code></li>
+</ol>
+<p>因此，最终输出分隔符为换行符，输入分隔符为连续换行，即按段落读入；</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; perl -ln00e <span class="string">&#x27;print if $. == 2&#x27;</span> <span class="built_in">test</span></span></span><br><span class="line">line 2</span><br><span class="line">line 3</span><br><span class="line">line 4</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+
+<h3 id="0-选项"><a href="#0-选项" class="headerlink" title="-0 选项"></a>-0 选项</h3><p>用于设置输入分隔符 <code>$/</code>， 数字 0</p>
+<ul>
+<li><code>-0 &lt;OCTNUM&gt;</code> (用 8 进制表示)<ul>
+<li>使用八进制数值 OCTNUM 对应的 ACSII 作为行输入分隔符</li>
+</ul>
+</li>
+<li><code>-0</code> <ul>
+<li>如果没有指定指定记录分隔符，等价于<code>$/ = undef</code>，表示一次性从文件头部一直读取到文件尾部当作一行；</li>
+<li>line 2&#x2F;3 无输出；</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; perl -0 -ne <span class="string">&#x27;print if $. == 1&#x27;</span> <span class="built_in">test</span></span></span><br><span class="line">line 1</span><br><span class="line"></span><br><span class="line">line 2</span><br><span class="line">line 3</span><br><span class="line">line 4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">line 5</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">line 6</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-00</code><ul>
+<li>段落模式，即使用换行作为分隔符，等价于 <code>$/ = &quot;&quot;</code>, 即按照段落读取内容，一段作为一行；</li>
+<li>不理解为什么输出会有两个换行符？ #why</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; perl -00ne <span class="string">&#x27;print if $. == 1&#x27;</span> <span class="built_in">test</span></span></span><br><span class="line">line 1</span><br><span class="line"></span><br><span class="line">                                                                                                                                                         </span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; perl -00ne <span class="string">&#x27;print if $. == 2&#x27;</span> <span class="built_in">test</span></span></span><br><span class="line">line 2</span><br><span class="line">line 3</span><br><span class="line">line 4</span><br><span class="line"></span><br><span class="line">                                                                                                                                                         </span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; perl -00ne <span class="string">&#x27;print if $. == 3&#x27;</span> <span class="built_in">test</span></span></span><br><span class="line">line 5</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="i-选项"><a href="#i-选项" class="headerlink" title="-i 选项"></a>-i 选项</h3><ul>
+<li>原地替换文件，并将旧文件用指定后缀扩展名备份，不指定扩展名则不备份</li>
+<li>如果extension中没有包含<code>*</code>，则字符作为原文件名的后缀，例如<code>-i&quot;.bak&quot;</code>。如果extension中包含了<code>*</code>，则每个<code>*</code>都代表原始文件名，这使得可以给文件加前缀、后缀等；</li>
+<li>比如 <code>-i&quot;file-*-1-*.bak&quot;</code>将命名为<code>file-FILENAME-1-FILENAME.bak</code>；</li>
+</ul>
+<h3 id="a-选项"><a href="#a-选项" class="headerlink" title="-a 选项"></a>-a 选项</h3><ul>
+<li>开启自动分割模式，在 while 循环中对每一行先进行一次 split 操作，默认用&#x3D;&#x3D;连续空格&#x3D;&#x3D;分隔 <code>$_</code> 并保存到 <code>@F</code> 中</li>
+</ul>
+<p>与 awk 不同，该数组的索引从 0 开始，最后一个字段可以用 <code>$F[-1] or $F[$#F]</code>; </p>
+<blockquote>
+<p>但是在数组切片时，经测试最后一个字段的索引不能使用 -1；</p>
+</blockquote>
+<p>如果需要多个字段，可以使用切片操作；<br>第3个&#x3D;&#x3D;和&#x3D;&#x3D;第5个字段， <del>$F[3,5]</del>  <code>@F[3,5]</code><br>第3个&#x3D;&#x3D;到&#x3D;&#x3D;第5个字段， <del>$F[3..5]</del>  <code>@F[3..5]</code></p>
+<p>更常用的是取某个字段到最后一个字段, <code>@F[3..$#F]</code><br>取某个字段到倒数第二个字段, <code>@F[3..$#F-1]</code></p>
+<ul>
+<li>分隔符可以使用 <code>-F</code> 参数指定，可以使用下列符号包围；</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-F: </span><br><span class="line">-F/:/ </span><br><span class="line">-F&quot;:&quot; </span><br><span class="line">-F&#x27;:&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; perl -F<span class="string">&#x27;ne&#x27;</span> -lane <span class="string">&#x27;print $F[0]&#x27;</span> <span class="built_in">test</span></span></span><br><span class="line">li</span><br><span class="line"></span><br><span class="line">li</span><br><span class="line">li</span><br><span class="line">li</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">li</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">li</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="m和-M选项"><a href="#m和-M选项" class="headerlink" title="-m和-M选项"></a>-m和-M选项</h3><p><code>-m</code>导入模块时，相当于执行了<code>use module ();</code>，这表示在程序中必须使用完整的名称来引用模块中的属性。例如<code>-m&#39;List::Util&#39;</code>时，在-e表达式中要使用其max函数，需要指定为<code>List::Util::max @arr</code>。</p>
+<p><code>-M</code>导入模块时，相当于执行了<code>use module;</code>，这时要使用模块中的属性仍然需要些完整的名称。但<code>-M</code>还支持额外的参数。例如<code>-M&#39;List::Util qw(max sum)&#39;</code>表示导入<code>List::Util</code>模块中的max和sum函数，这时在-e表达式中可以直接使用这两个函数名，而无需写完整的名称<code>List::Util::max @arr</code>。</p>
+<p>对于-m和-M，还有另一种”&#x3D;”的写法，这种写法使得-m和-M没有任何的区别。例如<br><code>-m&#39;List::Util=sum,max&#39;</code>和<code>-M&#39;List::Util=sum,max&#39;</code>是等价的，它们都表示导入这<code>List::Util</code>模块中的sum和max函数，使得使用这两个函数的时候无需再写完整名称。</p>
+<h3 id="s选项"><a href="#s选项" class="headerlink" title="-s选项"></a>-s选项</h3><p>perl的-s选项允许解析<code>--</code>之后的<code>-xxx=yyy</code>格式的开关选项。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e <span class="string">&#x27;xxxxx&#x27;</span> -- -name=abc -age=<span class="number">23</span> a.txt b.txt</span><br></pre></td></tr></table></figure>
+<p>从<code>--</code>之后的参数，它们本该被收集到ARGV中，但如果开启了-s选项，这些参数部分如果是<code>-xxx=yyy</code>格式的，则被解析成perl的变量<code>$xxx</code>并为其赋值yyy，而那些不是<code>-xxx=yyy</code>格式的参数则被收集到ARGV数组中。</p>
+<p>-xxx&#x3D;yyy 必须连续写，不能与 ARGV 混合；</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; perl -se <span class="string">&#x27;print $name,&quot;\n&quot;,$major,&quot;\n&quot;,$ARGV[0],&quot;\n&quot;,$ARGV[1];&#x27;</span> -- -name=guosc -major=ic test sourceme</span><br><span class="line">guosc</span><br><span class="line">ic</span><br><span class="line">test</span><br><span class="line">sourceme</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h4 id="修改之前备份文件"><a href="#修改之前备份文件" class="headerlink" title="修改之前备份文件"></a>修改之前备份文件</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 替换文件的同时保留原来的备份，以 bak 作为后缀名</span></span><br><span class="line"><span class="comment"># 注意 ：-e 选项必须放到所有的选项的最后</span></span><br><span class="line">perl -i.bak -pe <span class="string">&#x27;s#input#INPUT#g&#x27;</span> file</span><br></pre></td></tr></table></figure>
+
+<h4 id="替换命令"><a href="#替换命令" class="headerlink" title="替换命令"></a>替换命令</h4><p>实现 <code>dos2unix</code> 与 <code>unix2dos</code> 命令</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">perl -pie <span class="string">&#x27;s#\r\n#\n#g&#x27;</span> file <span class="comment">## dos2unix</span></span><br><span class="line">perl -pie <span class="string">&#x27;s#\n#\r\n#g&#x27;</span> file <span class="comment">## unix2dos</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="取出指定字段"><a href="#取出指定字段" class="headerlink" title="取出指定字段"></a>取出指定字段</h4><p>与 <code>awk</code> 不同，<code>perl</code> 的字段是从0开始计数。</p>
+<p>取出全部字段可以用 <code>@F</code> 。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以空格为分隔符（默认），取出字段 0-2 和 4</span></span><br><span class="line">perl -lane <span class="string">&#x27;print &quot;@F[0..2] $F[4]&quot; &#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以空格作为分隔符，取出相应字段</span></span><br><span class="line">ll | perl -lane <span class="string">&#x27;print &quot;@F[3..5] +++ $F[8]&quot; &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="取出指定行"><a href="#取出指定行" class="headerlink" title="取出指定行"></a>取出指定行</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取出前 10 行</span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print if 1..10&#x27;</span> file</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print if $. &lt; 11&#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不显示前 10 行</span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print unless 1..10&#x27;</span> file</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print unless $. &lt; 11&#x27;</span> file</span><br></pre></td></tr></table></figure>
+
+<h4 id="取出指定列"><a href="#取出指定列" class="headerlink" title="取出指定列"></a>取出指定列</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取出每行的前 10 个字符</span></span><br><span class="line">perl -lne <span class="string">&#x27;print substr($_, 0, 10)&#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 丢弃每行的前 10 个字符</span></span><br><span class="line">perl -lne <span class="string">&#x27;print substr($_,10)&#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关于 substr 函数的用法</span></span><br><span class="line"><span class="keyword">substr</span>(<span class="variable">$string</span>,offset,<span class="keyword">length</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># examples</span></span><br><span class="line">perl -le <span class="string">&#x27;print substr(&quot;123456&quot;,1,4)&#x27;</span></span><br><span class="line"><span class="comment"># 2345</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果省略 length，则一直取到字符串结尾 </span></span><br><span class="line">perl -le <span class="string">&#x27;print substr(&quot;123456&quot;,1)&#x27;</span></span><br><span class="line"><span class="comment"># 23456</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果 offset 为负值，则起始地址从右边开始，length 方向不变</span></span><br><span class="line"><span class="comment"># 下面 -6 表示起始位置，从右向左数第六个字符是 5，再向右数三个即 567</span></span><br><span class="line">perl -le <span class="string">&#x27;print substr(&quot;1234567890&quot;,-6,3)&#x27;</span></span><br><span class="line"><span class="comment"># 567</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="打印指定范围"><a href="#打印指定范围" class="headerlink" title="打印指定范围"></a>打印指定范围</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 打印匹配到 START 的行与匹配到 END 的行之间的行</span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print if m#START# .. m#END#&#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印匹配以上规则的部分</span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print unless m#START# .. m#END#&#x27;</span> file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印指定范围内的指定字段</span></span><br><span class="line">perl -lane <span class="string">&#x27;print &quot;$F[0] @F[1..4]&quot; if m#START# .. m#END#&#x27;</span> file</span><br></pre></td></tr></table></figure>
+
+<h4 id="打印所有包含某字符串的行"><a href="#打印所有包含某字符串的行" class="headerlink" title="打印所有包含某字符串的行"></a>打印所有包含某字符串的行</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print if m#comment# or m#apple#&#x27;</span> file</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line"><span class="comment"># or 与 || 唯一区别在于，|| 优先级更高</span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print if m#comment# || m#apple#&#x27;</span> file</span><br></pre></td></tr></table></figure>
+
+<h4 id="对某字段进行操作"><a href="#对某字段进行操作" class="headerlink" title="对某字段进行操作"></a>对某字段进行操作</h4><h4 id="打印文件总行数的三种方法"><a href="#打印文件总行数的三种方法" class="headerlink" title="打印文件总行数的三种方法"></a>打印文件总行数的三种方法</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 【1】END 块会在程序执行完成之后生效，此时当前行号变量 $. 是最后一行的行号，即为总行数</span></span><br><span class="line">perl -lne <span class="string">&#x27;END &#123;print $.&#125;&#x27;</span> test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 【2】利用 Perl 的上下文概念，将整个文件的读入一个 array，然后将这个 array 转换为 scalar 类型</span></span><br><span class="line"><span class="comment"># 以下三种方法原理相同</span></span><br><span class="line">perl -le <span class="string">&#x27;print scalar(()=&lt;&gt;)&#x27;</span> test</span><br><span class="line"><span class="comment"># or </span></span><br><span class="line">perl -le <span class="string">&#x27;print scalar(@a=&lt;&gt;)&#x27;</span> test</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">perl -le <span class="string">&#x27;print $a = @a = &lt;&gt;&#x27;</span> test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 【3】利用 &#125;&#123; (eskimo operator) 操作符（perl 中神(qi)奇(pa)的操作符真多）</span></span><br><span class="line"><span class="comment"># 该操作符的作用是跳出 while 循环（不知道其他的循环行不行）</span></span><br><span class="line">perl -lne <span class="string">&#x27;&#125;&#123; print $.&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="只给非空行编号，打印所有行"><a href="#只给非空行编号，打印所有行" class="headerlink" title="只给非空行编号，打印所有行"></a>只给非空行编号，打印所有行</h4><p><code>-p</code> 选项对文件内容循环打印，没有筛选</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -pe <span class="string">&#x27;$_ = ++$a.&quot; $_&quot; if /./&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="只给非空行编号，只打印非空行"><a href="#只给非空行编号，只打印非空行" class="headerlink" title="只给非空行编号，只打印非空行"></a>只给非空行编号，只打印非空行</h4><p><code>-n</code> 选项没有打印功能，而语句中的 <code>print</code> 只会打印满足匹配的行</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print ++$a.&quot; $_&quot; if /./&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="给所有行编号，打印所有行"><a href="#给所有行编号，打印所有行" class="headerlink" title="给所有行编号，打印所有行"></a>给所有行编号，打印所有行</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 -n </span></span><br><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print &quot;$. -&gt; $_&quot; &#x27;</span> test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 -p 直接修改 $_ 变量 </span></span><br><span class="line">perl -pe <span class="string">&#x27;$_ = &quot;$. -&gt; $_&quot;&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="给所有行编号，只打印非空行"><a href="#给所有行编号，只打印非空行" class="headerlink" title="给所有行编号，只打印非空行"></a>给所有行编号，只打印非空行</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print ++$a.&quot; $_&quot; if m#.#&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="给符合匹配的行编号，打印所有行"><a href="#给符合匹配的行编号，打印所有行" class="headerlink" title="给符合匹配的行编号，打印所有行"></a>给符合匹配的行编号，打印所有行</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -pe <span class="string">&#x27;$_ = ++$a.&quot; $_&quot; if m!#!&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="给符合匹配的行编号，只打印符合匹配的行"><a href="#给符合匹配的行编号，只打印符合匹配的行" class="headerlink" title="给符合匹配的行编号，只打印符合匹配的行"></a>给符合匹配的行编号，只打印符合匹配的行</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;print ++$a.&quot; $_&quot; if m!#!&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -<span class="keyword">ne</span> <span class="string">&#x27;printf &quot;%-5d -- %s&quot;, $., $_&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="打印文件中空行的行数"><a href="#打印文件中空行的行数" class="headerlink" title="打印文件中空行的行数"></a>打印文件中空行的行数</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -lne <span class="string">&#x27;++$a if /^$/; END &#123;print $a&#125;&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="打印文件中非空行-的行数"><a href="#打印文件中非空行-的行数" class="headerlink" title="打印文件中非空行 的行数"></a>打印文件中<em>非空行</em> 的行数</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用变量自加</span></span><br><span class="line">perl -lne <span class="string">&#x27;++$a if /./; END &#123;print $a&#125;&#x27;</span> test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用上下文变量特性</span></span><br><span class="line">perl -le <span class="string">&#x27;print scalar(grep&#123;m!.!&#125;&lt;&gt;)&#x27;</span> test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 perl 的智能匹配操作符 ~~</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="打印文件中空行-的行数"><a href="#打印文件中空行-的行数" class="headerlink" title="打印文件中空行 的行数"></a>打印文件中<em>空行</em> 的行数</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用变量自加</span></span><br><span class="line">perl -lne <span class="string">&#x27;++$a if /^$/; END &#123;print $a&#125;&#x27;</span> test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用上下文变量特性</span></span><br><span class="line">perl -le <span class="string">&#x27;print scalar(grep&#123;m!^$!&#125;&lt;&gt;)&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="统计并标记文件中每一个单词的顺序"><a href="#统计并标记文件中每一个单词的顺序" class="headerlink" title="统计并标记文件中每一个单词的顺序"></a>统计并标记文件中每一个单词的顺序</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># e 是可选修饰符，表示把替换部分的字符串看作表达式，在替换之前先计算其值</span></span><br><span class="line"><span class="comment"># 此处必需，否则不正确</span></span><br><span class="line">perl -pe <span class="string">&#x27;s!(\w+)!++$a.&quot;-&gt;$_&quot;!ge&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h4 id="统计并标记文件中每一个单词在每行中出现-的顺序"><a href="#统计并标记文件中每一个单词在每行中出现-的顺序" class="headerlink" title="统计并标记文件中每一个单词在每行中出现 的顺序"></a>统计并标记文件中每一个单词<em>在每行中出现</em> 的顺序</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 唯一区别在于每个循环的开始将变量清零</span></span><br><span class="line">perl -pe <span class="string">&#x27;$a=0; s!(\w+)!++$a.&quot;-&gt;$_&quot;!ge&#x27;</span> test</span><br></pre></td></tr></table></figure>
+
+<h2 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h2><h3 id="在命令行使用package"><a href="#在命令行使用package" class="headerlink" title="在命令行使用package"></a>在命令行使用package</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -Mmy_perl_pkg -<span class="keyword">ne</span> <span class="string">&#x27;next if my_perl_pkg::is_comment($_); print if (m|void \w+|..m|\)\s*(\&#123;\|;)|)&#x27;</span> lpx_skip_training_3733mbps.c &gt;&gt; ../../include/lpx_common_define.h</span><br></pre></td></tr></table></figure>
+
+<h3 id="get-sv-task-head"><a href="#get-sv-task-head" class="headerlink" title="get sv task head"></a>get sv task head</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -Mmy_perl_pkg -<span class="keyword">ne</span> <span class="string">&#x27;next if my_perl_pkg::is_comment($_); print if m|\btask\b|..m|\)?\s*\;|&#x27;</span> ipmphy_training_tasks.sv ipmphy_env.sv</span><br></pre></td></tr></table></figure>
+
+<h3 id="与-shell-交互"><a href="#与-shell-交互" class="headerlink" title="与 shell 交互"></a>与 shell 交互</h3><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; echo <span class="variable">$PRJ_HOME</span>/</span><br><span class="line"><span class="regexp">/ux/</span>FLC_FalconLite_SOC/cn1021/flc_falconlite/ip/flc_sub/DDR_SUB_TB/</span><br><span class="line"></span><br><span class="line"><span class="comment">## shell变量前的转义符号是必须的，否则会被当做perl变量；</span></span><br><span class="line">&gt;&gt;&gt; perl -e <span class="string">&#x27;$perl_home = qx&#123;echo \$PRJ_HOME/&#125;; $, = &quot;\n&quot;; print split m&#123;/&#125;, $perl_home&#x27;</span></span><br><span class="line"></span><br><span class="line">ux</span><br><span class="line">FLC_FalconLite_SOC</span><br><span class="line">cn1021</span><br><span class="line">flc_falconlite</span><br><span class="line">ip</span><br><span class="line">flc_sub</span><br><span class="line">DDR_SUB_TB</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>grep 结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq0 is aa</span><br><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq1 is 99</span><br><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq2 is 87</span><br><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq3 is 7f</span><br><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq4 is aa</span><br><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq5 is 99</span><br><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq6 is 87</span><br><span class="line">uvm_test_top.env.lpxphy_env [TRNINFO::LPBK] Burst 0-7::Read data for byte0 dq7 is 7f</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">grep -P &quot;TRNINFO::LPBK.*Burst 0-7.*byte0&quot; vcs_simv.log | perl -ne &#x27;$cnt++ if (m/is (\w&#123;1,2&#125;)/); if ($cnt%8 == 0) &#123;printf &quot;%2s\n&quot;, $1&#125; else &#123;printf &quot;%2s &quot;, $1&#125;;&#x27;</span><br><span class="line"></span><br><span class="line">aa cc 2d 57 aa cc 2d 57</span><br><span class="line">aa 66 2d df aa 66 2d df</span><br><span class="line">2a 99 c0 c7 aa 99 58  7</span><br><span class="line">aa 33 a5 5f aa 33 a5 5f</span><br><span class="line">aa 66 12 15 aa 66 70  5</span><br><span class="line">aa cc  f 77 aa cc  f 77</span><br><span class="line">aa 99  f 77 aa 99  f 77</span><br><span class="line">aa 99 87 7f aa 99 87 7f</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/f-ck-need-u/p/9512185.html#blogperloneline">骏马金龙 perl 系列文章</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/05/05/perl_one_line/" data-id="cm6u817yx000bao0reuhscu14" data-title="Perl单行命令" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/perl-one-line/" rel="tag">perl_one_line</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/22/git/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Git基本操作
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%87%E5%BF%98/">备忘</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/find/" rel="tag">find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/" rel="tag">perl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl-one-line/" rel="tag">perl_one_line</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">c语言</a> <a href="/tags/find/" style="font-size: 10px;">find</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/perl/" style="font-size: 10px;">perl</a> <a href="/tags/perl-one-line/" style="font-size: 10px;">perl_one_line</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/07/hexo/">hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E5%8F%98%E9%87%8F/">C 语言变量</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/gcc/">GCC 工具链</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/25/shell/">shell 相关</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 guoshaocheng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>数组与指针 | Silicon Walker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文随便记录指针数组相关。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组与指针">
+<meta property="og:url" content="http://example.com/2025/02/07/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/index.html">
+<meta property="og:site_name" content="Silicon Walker">
+<meta property="og:description" content="本文随便记录指针数组相关。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-02-07T03:39:50.493Z">
+<meta property="article:modified_time" content="2025-02-07T03:42:54.376Z">
+<meta property="article:author" content="guoshaocheng">
+<meta property="article:tag" content="c语言">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Silicon Walker" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Silicon Walker</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-数组与指针" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/02/07/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/" class="article-date">
+  <time class="dt-published" datetime="2025-02-07T03:39:50.493Z" itemprop="datePublished">2025-02-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      数组与指针
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本文随便记录指针数组相关。</p>
+<span id="more"></span>
+
+<h2 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h2><p><code>str_arr</code> 只是C语言中的字符数组，不是C语言中的字符串。</p>
+<p>二者区别在于，字符数组不能使用C语言 <code>string.h</code> 提供的各种字符串函数。</p>
+<p><code>str</code> 是C语言中的字符串，区别在于其以 <code>\0</code> 或者<code>0</code> 结尾，这二者与 <code>&#39;0&#39;</code> 不同。</p>
+<ul>
+<li><code>0</code> 表示整数的零，int 类型，4个字节</li>
+<li><code>\0</code> 一定是1个字节的大小，是整数 0</li>
+<li><code>&#39;0&#39;</code> 表示字符0，对应ASCII码中的 0x30</li>
+</ul>
+<p>结尾的0：</p>
+<ul>
+<li>0 用于标识字符串的结尾位置，字符串操作函数中需要用到这个0；</li>
+<li>在计算字符串长度时(strlen函数)，不计入上述的 0 ；</li>
+<li>但是在内存中 0 还是要占据相应的位置，比如 <code>&quot;hello&quot;</code> 字符串长度为5，但是占据6个字节的内存空间；</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str_arr[] = &#123;<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>&#125;;</span><br><span class="line"><span class="type">char</span> str[] = &#123;<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;e&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;l&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;\0&#x27;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>“hello”</p>
+<ul>
+<li>用这个形式初始化的字符串会在末尾自动添加表示结尾的 0；</li>
+</ul>
+<p>数组形式和指针形式字符串的区别：</p>
+<ul>
+<li><p><code>char *str_ptr</code> 实际上隐式地含义是 <code>const char *str_ptr</code> ，即是一个常量。</p>
+</li>
+<li><p>指针 <code>str_ptr</code> 指向一个字符串常量，被存储在内存中的只读区域，不能被修改。</p>
+</li>
+<li><p>在编译时就已经初始化字符串的值，两个指向完全相同的字符串的指针指向同一个位置。</p>
+</li>
+<li><p><code>str_arr</code> 可以修改字符串的值。</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *str_ptr  = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="type">char</span> str_arr[] = <span class="string">&quot;hello&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>char* 不一定是字符串：</p>
+<ul>
+<li>char* 指表示指向char类型的指针，可能是字符串，可能是单个字符；<ul>
+<li>类似于int*，表示指向单个int类型或者int类型数组的指针，并不一定表示int类型数组；</li>
+</ul>
+</li>
+<li>只有当 char* 指向的字符串以 0 结尾时，才能说他指向字符串；</li>
+</ul>
+<h2 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h2><p><code>&amp;</code> 运算符用于取变量地址，其操作数只能是变量，使用 <code>%p</code> 打印返回的地址。</p>
+<p>对于数组 a ，<code>a</code> <code>&amp;a</code> <code>&amp;a[0]</code> 的含义相同，都表示数组第一个元素的地址。</p>
+<p>指针类型的变量就是用于保存地址的变量，int类型变量不一定可以保存地址。</p>
+<ul>
+<li>计算机的字长与内存地址的位宽不一定相等。</li>
+</ul>
+<p>没有 int* 这种类型，* 永远跟着其后面的变量。</p>
+<ul>
+<li><code>int* p,q ;</code>  中，p为指针类型，q为int类型。</li>
+</ul>
+<p>数组作为函数参数时，传递的是数组的首地址，即指向数组的指针。</p>
+<p>数组变量是一种特殊的指针，所以对于一个指针变量 <code>*p</code>， <code>*p</code> 与 <code>p[0]</code> 的值相同。</p>
+<p>数组是常量指针，<code>int a[]</code> 等价于 <code>int * const a</code> ，指针类型 a 是 <code>const</code> 类型，可以改变 *a 的值，但是不能改变 a 本身的值。</p>
+<p><code>const int *p = &amp;i;</code> 表示 <code>*p</code> 是 <code>const</code> 类型，但是 p 变量的值可以变，i  变量的值也可以变，但是不能通过 <code>*p</code> 的方式改变 i 的值。</p>
+<p><code>const int a[] = &#123;1,2,3,4&#125;;</code>  表示数组中每个变量都是 <code>const</code> 类型。</p>
+<h3 id="指针加一"><a href="#指针加一" class="headerlink" title="指针加一"></a>指针加一</h3><p>根据指针变量所指向的变量类型，当指针指向 <code>char</code> 类型时，指针加一的结果也是加一；当时当指针指向 <code>int</code> 类型时，指针加一的结果加 4 ，即指针加一的结果是加上 <code>sizeof(type)</code> 。</p>
+<h3 id="指针相减"><a href="#指针相减" class="headerlink" title="指针相减"></a>指针相减</h3><p>指针相减的结果的单位是 <code>sizeof(type)</code> 。</p>
+<h3 id="p"><a href="#p" class="headerlink" title="*p++"></a>*p++</h3><p>++运算符的优先级比*高</p>
+<p>取出p所指向的数据，然后指向下一个内存位置的数据。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/02/07/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/" data-id="cm6u817zd001iao0rdc0b7mv5" data-title="数组与指针" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/02/07/hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          hexo常用指令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/02/07/%E5%8F%98%E9%87%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">C 语言变量</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%87%E5%BF%98/">备忘</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/find/" rel="tag">find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/" rel="tag">perl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl-one-line/" rel="tag">perl_one_line</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">c语言</a> <a href="/tags/find/" style="font-size: 10px;">find</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/perl/" style="font-size: 10px;">perl</a> <a href="/tags/perl-one-line/" style="font-size: 10px;">perl_one_line</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/07/hexo/">hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E5%8F%98%E9%87%8F/">C 语言变量</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/gcc/">GCC 工具链</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/25/shell/">shell 相关</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 guoshaocheng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

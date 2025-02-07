@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>find 命令 | Silicon Walker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="该系列文章用于记录 Linux 系统下常用的命令，包括用于文件查找 find 命令，以及文本处理的三剑客 - grep, sed, awk。本文是系列的第一篇，记录 find 命令的常用用法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="find 命令">
+<meta property="og:url" content="http://example.com/2019/08/10/find/index.html">
+<meta property="og:site_name" content="Silicon Walker">
+<meta property="og:description" content="该系列文章用于记录 Linux 系统下常用的命令，包括用于文件查找 find 命令，以及文本处理的三剑客 - grep, sed, awk。本文是系列的第一篇，记录 find 命令的常用用法。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-08-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-07T03:29:11.687Z">
+<meta property="article:author" content="guoshaocheng">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="find">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Silicon Walker" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Silicon Walker</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Suche"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-find" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/08/10/find/" class="article-date">
+  <time class="dt-published" datetime="2019-08-09T16:00:00.000Z" itemprop="datePublished">2019-08-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      find 命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>该系列文章用于记录 Linux 系统下常用的命令，包括用于文件查找 find 命令，以及文本处理的三剑客 - grep, sed, awk。<br>本文是系列的第一篇，记录 find 命令的常用用法。</p>
+<span id="more"></span>
+
+<h1 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h1><p>path 指find命令作用的目录，match 指匹配的模式，action 指对匹配成功的对象进行的操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find path options match action</span><br></pre></td></tr></table></figure>
+
+<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-a  ## 逻辑与 </span><br><span class="line">-o  ## 逻辑或</span><br><span class="line">!   ## 逻辑非</span><br></pre></td></tr></table></figure>
+
+<h1 id="按名称查找"><a href="#按名称查找" class="headerlink" title="按名称查找"></a>按名称查找</h1><h2 id="name"><a href="#name" class="headerlink" title="-name"></a>-name</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-name    -&gt;  按照文件名（<span class="built_in">basename</span>）查找，可以使用通配符, -name <span class="string">&quot;*.c&quot;</span></span><br><span class="line">-iname   -&gt;  与-name相同，不区分大小写</span><br></pre></td></tr></table></figure>
+
+<h2 id="path"><a href="#path" class="headerlink" title="-path"></a>-path</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-path    -&gt;  按照文件路径和文件名（<span class="built_in">dirname</span>+<span class="built_in">basename</span>）查找，此时将 <span class="string">&#x27;/&#x27;</span> 与 <span class="string">&#x27;.&#x27;</span> 视为普通字符。</span><br><span class="line">-ipath   -&gt;  与-path相同，不区分大小写</span><br><span class="line"><span class="comment">## 因为匹配模式部分最后一部分是文件名（basename），所以用 -path 选项进行匹配时，匹配模式部分不可能以 / 结尾，否则匹配不到任何内容。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## -name 与 -path 的区别</span></span><br><span class="line"><span class="comment">## 要查找当前目录下的 a.c 文件</span></span><br><span class="line">find -name <span class="string">&quot;a.c&quot;</span></span><br><span class="line">find -path <span class="string">&quot;./a.c&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="regex"><a href="#regex" class="headerlink" title="-regex"></a>-regex</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-regex   -&gt;  基于正则表达式匹配文件，默认使用 Emacs 正则表达式语法，可以使用 -regextype 修改。</span><br><span class="line">使用 find -regextype <span class="built_in">help</span> 命令可以得到可选的正则表达式类型:valid types are ‘findutils-default’, ‘awk’, ‘egrep’, ‘ed’, ‘emacs’, ‘gnu-awk’, ‘grep’, ‘posix-awk’, ‘posix-basic’, ‘posix-egrep’, ‘posix-extended’, ‘posix-minimal-basic’, ‘sed’.</span><br><span class="line">-iregex  -&gt;  与-regex相同，不区分大小写</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用 -regex 选项匹配的对象与 -path 相同，也是包含路径信息的文件名。</span></span><br><span class="line"><span class="comment">## 例如，要查找当前路径下的 foobar3 文件</span></span><br><span class="line">find -regex <span class="string">&quot;.*f.*3&quot;</span>，而不能用 find -regex <span class="string">&quot;f.*3&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="按类型查找"><a href="#按类型查找" class="headerlink" title="按类型查找"></a>按类型查找</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-<span class="built_in">type</span>    -&gt;  查找某一类型的文件</span><br><span class="line">usage: d -&gt;  目录</span><br><span class="line">       f -&gt;  普通文件</span><br><span class="line">       l -&gt;  符号链接文件</span><br></pre></td></tr></table></figure>
+
+<h1 id="按大小查找"><a href="#按大小查找" class="headerlink" title="按大小查找"></a>按大小查找</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-size    -&gt;  查找指定文件大小的文件</span><br><span class="line">usage: c -&gt; 1 byte</span><br><span class="line">       w -&gt; word(2 byte)</span><br><span class="line">       b -&gt; block(521 byte)</span><br><span class="line">       k -&gt; 1KByte</span><br><span class="line">       M -&gt; 1MByte</span><br><span class="line">       G -&gt; 1GByte</span><br><span class="line">find . -<span class="built_in">type</span> f -size +10k，查找文件大小大于 10KB 的文件</span><br><span class="line">find . -<span class="built_in">type</span> f -size -10k，查找文件大小小于 10KB 的文件</span><br><span class="line">find . -<span class="built_in">type</span> f -size  10k，查找文件大小等于 10KB 的文件</span><br></pre></td></tr></table></figure>
+
+<h1 id="按权限查找"><a href="#按权限查找" class="headerlink" title="按权限查找"></a>按权限查找</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-perm    -&gt; 按照文件权限查找, -perm 755</span><br><span class="line">-user    -&gt; 按照文件所属的用户进行查找，find . -user tom -<span class="built_in">print</span></span><br><span class="line">-group   -&gt; 按照文件所属的组进行查找，find . -group oa -<span class="built_in">print</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="按时间查找"><a href="#按时间查找" class="headerlink" title="按时间查找"></a>按时间查找</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-atime   -&gt; 按照文件上次的访问时间进行查找，单位为天（24小时）</span><br><span class="line">-amin    -&gt; 与-atime类似，单位为分钟</span><br><span class="line"></span><br><span class="line">-ctime   -&gt; 按照文件状态改变时间进行查找，<span class="built_in">chmod</span> 会改变ctime</span><br><span class="line">-cmin    -&gt; 与-ctime类似，单位为分钟</span><br><span class="line"></span><br><span class="line">-mtime   -&gt; 按照文件内容的上次修改时间进行查找，单位为天（24小时）</span><br><span class="line">-mmin    -&gt; 与-mtime类似，单位为分钟</span><br><span class="line"></span><br><span class="line">uasge: find . -mtime -5 -<span class="built_in">print</span>，查找更改时间在5天以内的文件</span><br><span class="line">uasge: find . -mtime +5 -<span class="built_in">print</span>，查找更改时间在5天以前的文件</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用 stat file 命令可以查看 file 文件的atime，ctime，mtime。</span></span><br><span class="line">atime – Last Access Time，通常less，more，<span class="built_in">cat</span>命令会改变atime。</span><br><span class="line">ctime – Last Change Time，通常指文件user或group发生改变，或者访问权限发生改变，或者文件内容发生改变（即mtime改变时，ctime一定会改变）。</span><br><span class="line">mtime – Last Modification Time，指文件内容发生改变。</span><br><span class="line"></span><br><span class="line">-newer file1 ! file2 -&gt; 查找上一次更改时间在file1之后，但在file2之前的文件，即比file1新，但比file2旧。</span><br></pre></td></tr></table></figure>
+
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="普通方法"><a href="#普通方法" class="headerlink" title="普通方法"></a>普通方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">## 修改时间在一天之前</span><br><span class="line">find -maxdepth 1 -mtime +1</span><br><span class="line">## 修改时间在一天之内</span><br><span class="line">find -maxdepth 1 -mtime +1</span><br><span class="line"></span><br><span class="line">## 修改时间在一分钟之前</span><br><span class="line">find -maxdepth 1 -mmin +1</span><br><span class="line">## 修改时间在一分钟之内</span><br><span class="line">find -maxdepth 1 -mmin -1</span><br></pre></td></tr></table></figure>
+
+<h3 id="骚操作"><a href="#骚操作" class="headerlink" title="骚操作"></a>骚操作</h3><p>Step1: touch 一个新文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 创建一个时间戳为 04月23日08时00分 的文件</span></span></span><br><span class="line">touch -t 04230800 stamp</span><br></pre></td></tr></table></figure>
+
+<p>Step2: 与该stamp文件进行比较</p>
+<p>所有修改时间晚于 04月23日08时00分 的文件，即比stamp文件要<code>新</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find  -maxdepth 1 -newer stamp</span><br></pre></td></tr></table></figure>
+
+<p>所有修改时间早于 04月23日08时00分 的文件，即比stamp文件要<code>旧</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># ! 表示逻辑非</span></span></span><br><span class="line">find -maxdepth 1 ! -newer stamp</span><br></pre></td></tr></table></figure>
+
+<p>查找位于特定时间区间的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">touch -t 04230800 sta_stamp</span><br><span class="line">touch -t 04230859 end_stamp</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># -a 表示逻辑与，同理 -o 表示逻辑或</span></span></span><br><span class="line">find  -maxdepth 1 -newer sta_stamp -a ! -newer end_stamp</span><br></pre></td></tr></table></figure>
+
+<h1 id="指定查找范围"><a href="#指定查找范围" class="headerlink" title="指定查找范围"></a>指定查找范围</h1><p>与Linux中许多其他命令不同，find 命令不需要 -r 或者 -R 选项，默认情况下就会在当前目录及其子目录下进行递归查找。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-prune   -&gt;  不在指定目录下查找文件，下例中只在 ./dir 下目录查找，不在 ./dir/exclude 下查找。</span><br><span class="line">uasge: find ./dir -path ./dir/exclude -prune -o -name a.c -<span class="built_in">print</span> （-o 表示逻辑或，也可用 -or）</span><br><span class="line"><span class="comment">## 布尔类型“-o”使 find 可以针对其他目录处理该命令的其余部分。由于每个表达式之间有一个假设的隐式 and 运算符 (-a)，因此，如果左侧的表达式计算结果为 false， and 之后的表达式将不进行计算；因此需要 -o 运算符。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 排除多个文件夹</span></span><br><span class="line">find project \( -path project/bin -o -path project/doc \) -prune -o -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">print</span></span><br><span class="line"></span><br><span class="line">-maxedpth n -&gt;  向下查找的最大深度为 n</span><br><span class="line">-mindepth n -&gt;  向下查找的最小深度为 n</span><br><span class="line"></span><br><span class="line">？？-depth   -&gt;  Process each directory<span class="string">&#x27;s contents before the directory itself.</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h1><h2 id="使用-exec"><a href="#使用-exec" class="headerlink" title="使用 exec"></a>使用 exec</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 使用 -exec 参数</span></span><br><span class="line">-<span class="built_in">exec</span>  -&gt;  执行其他命令</span><br><span class="line">-ok    -&gt;  与 -<span class="built_in">exec</span> 行为相同，但是在执行操作之前需要用户确认</span><br><span class="line"></span><br><span class="line"><span class="comment">## 以下例中的 -exec 都可以换为 -ok</span></span><br><span class="line"><span class="comment">## &#123;&#125; 用于表示前面匹配到的文件名</span></span><br><span class="line"><span class="comment">## ; 是 -exec 参数的终止符号，在 ; 前面加 \ 是因为不同的系统中分号具有不同的含义，所以加上反斜杠进行转义。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 找到当前目录下所有文件并将其列出</span></span><br><span class="line">find -<span class="built_in">type</span> f -<span class="built_in">exec</span> <span class="built_in">ls</span> -l &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 找到当前目录下所有的 log 文件并删除</span></span><br><span class="line">find -<span class="built_in">type</span> f -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> &#123;&#125; \; </span><br><span class="line"></span><br><span class="line"><span class="comment">## 将当前目录下所有的 txt 文件写入到一个 des.txt 文件中</span></span><br><span class="line"><span class="comment">## 经试验，下面两种写法结果相同</span></span><br><span class="line">find -<span class="built_in">type</span> f -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> <span class="built_in">cat</span> &#123;&#125; \; &gt; des.txt</span><br><span class="line">find -<span class="built_in">type</span> f -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> <span class="built_in">cat</span> &#123;&#125; &gt; des.txt \;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 将30天之前的log文件移动到trash目录中</span></span><br><span class="line">find -<span class="built_in">type</span> f -mtime +30 -name <span class="string">&quot;*.log&quot;</span> -<span class="built_in">exec</span> <span class="built_in">mv</span> &#123;&#125; trash \;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 将位于特定时间区间内的文件备份到bk_dir文件夹</span></span><br><span class="line">find  -maxdepth 1 -newer sta_stamp -a ! -newer end_stamp -<span class="built_in">exec</span> <span class="built_in">mv</span> &#123;&#125; bk_dir/ \;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 找到当前目录下所有的 txt 文件并格式化打印</span></span><br><span class="line">find -<span class="built_in">type</span> f -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> <span class="built_in">printf</span> <span class="string">&quot;File name: %s\n&quot;</span> &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment">## 找到当前目录下所有的 txt 文件并对其内容使用 grep 进行查找</span></span><br><span class="line">find -<span class="built_in">type</span> f -name <span class="string">&quot;*.txt&quot;</span> -<span class="built_in">exec</span> grep <span class="string">&quot;hello&quot;</span> &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+<h2 id="使用-xargs-参数"><a href="#使用-xargs-参数" class="headerlink" title="使用 xargs 参数"></a>使用 xargs 参数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 与 grep 命令一起用</span></span></span><br><span class="line">find . -type f -print | xargs grep &quot;hello&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 文件合并</span></span></span><br><span class="line">find -type f -name &quot;*.txt&quot; | xargs cat &gt; des.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 将find命令结果保存到des.txt</span></span></span><br><span class="line">find -type f -name &quot;*.txt&quot; | xargs echo &gt; des.txt  ## 可以不加 “ ”</span><br><span class="line">find -type f -name &quot;*.txt&quot; | xargs echo &quot;&quot; &gt; des.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 删除匹配到的文件</span></span></span><br><span class="line">find -type f -name &quot;*.log&quot; | xargs rm -rf</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 复制匹配到的文件</span></span></span><br><span class="line">find -type f -name &quot;test*&quot; | xargs -i cp &#123;&#125; newdir </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># -i 参数默认指定前面的输出使用 &#123;&#125; 替代</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># -I 参数可以指定其他替代字符</span></span></span><br><span class="line">find -type f -name &quot;test*&quot; | xargs -I [] cp [] newdir </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 移动匹配到的文件</span></span></span><br><span class="line">find -type f -name &quot;test*&quot; | xargs -i mv &#123;&#125; ..</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="找出空文件"><a href="#找出空文件" class="headerlink" title="找出空文件"></a>找出空文件</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -empty</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man1/find.1.html">man-page of find</a></p>
+<p><a target="_blank" rel="noopener" href="https://man.linuxde.net/find">Linux 命令大全</a></p>
+<p><a target="_blank" rel="noopener" href="https://linux.cn/article-1672-1.html">linux 中强大且常用命令</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/cn/topics/calish-find-096463-zhs.html">Linux Find 命令精通指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.yiibai.com/linux/find-xargs.html">易百教程 - find命令 xargs参数</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/08/10/find/" data-id="cm6u817yv0005ao0r48rpakyp" data-title="find 命令" class="article-share-link"><span class="fa fa-share">Teilen</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/find/" rel="tag">find</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/08/10/awk/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          awk 命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/22/git/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">Git基本操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorien</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C%E8%AF%AD%E8%A8%80/">C语言</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%A4%87%E5%BF%98/">备忘</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c%E8%AF%AD%E8%A8%80/" rel="tag">c语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/find/" rel="tag">find</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl/" rel="tag">perl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/perl-one-line/" rel="tag">perl_one_line</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/c%E8%AF%AD%E8%A8%80/" style="font-size: 15px;">c语言</a> <a href="/tags/find/" style="font-size: 10px;">find</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/perl/" style="font-size: 10px;">perl</a> <a href="/tags/perl-one-line/" style="font-size: 10px;">perl_one_line</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">February 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/02/07/hexo/">hexo常用指令</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E6%95%B0%E7%BB%84%E4%B8%8E%E6%8C%87%E9%92%88/">数组与指针</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/%E5%8F%98%E9%87%8F/">C 语言变量</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/07/gcc/">GCC 工具链</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/25/shell/">shell 相关</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 guoshaocheng<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
